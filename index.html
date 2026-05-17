@@ -561,28 +561,25 @@ input[type="checkbox"].hidden-check {
 
 <div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
 
-<!-- ── HERO ── -->
 <header class="hero" id="siteHeader">
   <div class="hero-stars" id="starsContainer"></div>
   <div class="hero-logo">A2BOOK STUDIO · هندسة تجربة الكتاب</div>
   <h1>بريف المشروع</h1>
   <p class="hero-sub">كل إجابة هنا تُترجَم مباشرة إلى قرار تصميمي — خذ وقتك</p>
   <div class="hero-steps" id="stepsNav">
-    <div class="hero-step active" data-step="0"><span class="hero-step-num">①</span>الخدمة</div>
-    <div class="hero-step" data-step="1"><span class="hero-step-num">②</span>عن نفسك</div>
-    <div class="hero-step" data-step="2"><span class="hero-step-num">③</span>عن الكتاب</div>
-    <div class="hero-step" data-step="3"><span class="hero-step-num">④</span>التصميم</div>
-    <div class="hero-step" data-step="4"><span class="hero-step-num">⑤</span>التوقعات</div>
-    <div class="hero-step" data-step="5"><span class="hero-step-num">⑥</span>الإرسال</div>
+    <div class="hero-step active" data-step="0" onclick="showScreen(0)"><span class="hero-step-num">①</span>الخدمة</div>
+    <div class="hero-step" data-step="1" onclick="showScreen(1)"><span class="hero-step-num">②</span>عن نفسك</div>
+    <div class="hero-step" data-step="2" onclick="showScreen(2)"><span class="hero-step-num">③</span>عن الكتاب</div>
+    <div class="hero-step" data-step="3" onclick="showScreen(3)"><span class="hero-step-num">④</span>التصميم</div>
+    <div class="hero-step" data-step="4" onclick="showScreen(4)"><span class="hero-step-num">⑤</span>التوقعات</div>
+    <div class="hero-step" data-step="5" onclick="showScreen(5)"><span class="hero-step-num">⑥</span>الإرسال</div>
   </div>
 </header>
 
-<!-- ── FORM ── -->
 <div class="main">
 
-<form id="briefForm" action="https://formspree.io/f/badr.mo2011@gmail.com" method="POST">
+<form id="briefForm" action="https://formspree.io/a2bookstudio@gmail.com" method="POST">
 
-  <!-- hidden aggregated fields -->
   <input type="hidden" name="_subject" value="A2BOOK Brief جديد">
   <input type="hidden" name="_replyto" id="f_replyto">
   <input type="hidden" name="نوع_الخدمة" id="f_service">
@@ -594,9 +591,8 @@ input[type="checkbox"].hidden-check {
   <input type="hidden" name="خيارات_الغلاف" id="f_coveropts">
   <input type="hidden" name="مستوى_الجهوزية" id="f_readiness">
   <input type="hidden" name="الميزانية_التقريبية" id="f_budget">
-  <input type="hidden" name="الأولوية" id="f_priority">
+  <input type="hidden" name="الأولوية" id="f_priority_hidden">
 
-  <!-- ════════ SCREEN 0: SERVICE TYPE ════════ -->
   <div class="screen active" id="screen-0">
     <div class="screen-header">
       <div class="screen-tag">الخطوة الأولى</div>
@@ -637,7 +633,6 @@ input[type="checkbox"].hidden-check {
     </div>
   </div>
 
-  <!-- ════════ SCREEN 1: AUTHOR INFO ════════ -->
   <div class="screen" id="screen-1">
     <div class="screen-header">
       <div class="screen-tag">الخطوة الثانية</div>
@@ -648,11 +643,11 @@ input[type="checkbox"].hidden-check {
     <div class="field-row">
       <div class="field-group">
         <label class="field-label">الاسم الكامل <span class="field-required">*</span></label>
-        <input type="text" name="الاسم_الكامل" id="f_name" placeholder="اسمك كما تريده على التواصل" required>
+        <input type="text" name="الاسم_الكامل" id="f_name" placeholder="اسمك كما تريده على التواصل">
       </div>
       <div class="field-group">
         <label class="field-label">البريد الإلكتروني <span class="field-required">*</span></label>
-        <input type="email" name="البريد_الإلكتروني" id="f_email" placeholder="email@example.com" required oninput="syncReply()">
+        <input type="email" name="البريد_الإلكتروني" id="f_email" placeholder="email@example.com" oninput="syncReply()">
       </div>
     </div>
 
@@ -708,7 +703,6 @@ input[type="checkbox"].hidden-check {
     </div>
   </div>
 
-  <!-- ════════ SCREEN 2: BOOK INFO ════════ -->
   <div class="screen" id="screen-2">
     <div class="screen-header">
       <div class="screen-tag">الخطوة الثالثة</div>
@@ -719,7 +713,7 @@ input[type="checkbox"].hidden-check {
     <div class="field-row">
       <div class="field-group">
         <label class="field-label">عنوان الكتاب <span class="field-required">*</span></label>
-        <input type="text" name="عنوان_الكتاب" placeholder="العنوان النهائي أو المقترح" required>
+        <input type="text" name="عنوان_الكتاب" id="f_booktitle" placeholder="العنوان النهائي أو المقترح">
       </div>
       <div class="field-group">
         <label class="field-label">التصنيف الرئيسي</label>
@@ -746,7 +740,7 @@ input[type="checkbox"].hidden-check {
     <div class="field-group">
       <label class="field-label">في جملة واحدة — ما الفكرة المحورية للكتاب؟ <span class="field-required">*</span></label>
       <span class="field-hint">لا تلخّص — قُل ما يريد القارئ أن يعيشه بعد قراءته</span>
-      <textarea name="الفكرة_المحورية" id="coreIdeaInput" placeholder="مثال: كيف تستعيد تركيزك الحقيقي في عالم مليء بالضجيج..." maxlength="300" oninput="updateCounter('coreIdeaInput','coreIdeaCount')" required></textarea>
+      <textarea name="الفكرة_المحورية" id="coreIdeaInput" placeholder="مثال: كيف تستعيد تركيزك الحقيقي في عالم مليء بالضجيج..." maxlength="300" oninput="updateCounter('coreIdeaInput','coreIdeaCount')"></textarea>
       <div class="char-counter"><span id="coreIdeaCount">0</span> / 300</div>
     </div>
 
@@ -789,7 +783,6 @@ input[type="checkbox"].hidden-check {
     </div>
   </div>
 
-  <!-- ════════ SCREEN 3: DESIGN DETAILS ════════ -->
   <div class="screen" id="screen-3">
     <div class="screen-header">
       <div class="screen-tag">الخطوة الرابعة</div>
@@ -797,7 +790,6 @@ input[type="checkbox"].hidden-check {
       <p class="screen-desc">هنا نُترجم محتواك إلى قرارات بصرية — أجب بما تشعر به، لا بما تعرفه تقنياً.</p>
     </div>
 
-    <!-- COVER SECTION (conditional) -->
     <div class="conditional-section" id="coverSection">
       <div class="info-box">
         <div class="info-box-icon">🎨</div>
@@ -805,7 +797,7 @@ input[type="checkbox"].hidden-check {
       </div>
 
       <div class="field-group">
-        <label class="field-label">ما التوجه البصري الذي تريده للغلاف؟</label>
+        <label class="field-label">ما التوجه البصري الذي تريده للغلاف?</label>
         <span class="field-hint">اختر ما يناسب روح كتابك — يمكن اختيار أكثر من واحد</span>
         <div class="pill-group" id="coverStyleGroup">
           <div class="pill" data-value="تايبوغرافي (النص هو الغلاف)" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">تايبوغرافي — النص بطل الغلاف</div>
@@ -834,7 +826,6 @@ input[type="checkbox"].hidden-check {
       <div class="divider"></div>
     </div>
 
-    <!-- INTERIOR SECTION (always shown) -->
     <div class="info-box">
       <div class="info-box-icon">📄</div>
       <div><p><strong>التنسيق الداخلي للكتاب</strong><br>القرارات هنا تحدد كيف يقرأ القارئ كتابك — وكم سيستمتع بالتجربة.</p></div>
@@ -954,7 +945,6 @@ input[type="checkbox"].hidden-check {
     </div>
   </div>
 
-  <!-- ════════ SCREEN 4: EXPECTATIONS ════════ -->
   <div class="screen" id="screen-4">
     <div class="screen-header">
       <div class="screen-tag">الخطوة الخامسة</div>
@@ -1001,7 +991,6 @@ input[type="checkbox"].hidden-check {
         <div class="toggle-btn" onclick="toggleBtn(this,'priority-group')" data-group="priority-group" data-value="الجودة — مهما استغرق">الجودة أولاً ✦</div>
         <div class="toggle-btn" onclick="toggleBtn(this,'priority-group')" data-group="priority-group" data-value="التوازن بينهما">التوازن بينهما</div>
       </div>
-      <input type="hidden" name="الأولوية" id="f_priority_hidden">
     </div>
 
     <div class="field-row">
@@ -1027,7 +1016,6 @@ input[type="checkbox"].hidden-check {
     </div>
   </div>
 
-  <!-- ════════ SCREEN 5: FINAL QUESTION + SUBMIT ════════ -->
   <div class="screen" id="screen-5">
     <div class="screen-header">
       <div class="screen-tag">الخطوة الأخيرة</div>
@@ -1042,7 +1030,7 @@ input[type="checkbox"].hidden-check {
     <div class="field-group">
       <label class="field-label">ما الذي تخشى ألا يفهمه المصمم عن كتابك؟ <span class="field-required">*</span></label>
       <span class="field-hint">لا تُرضي المصمم — قُل ما يُقلقك فعلاً. كل كلمة تكتبها هنا تُترجَم لاحقاً في كل قرار بصري.</span>
-      <textarea name="السؤال_الجوهري" id="keyQuestionInput" placeholder="مثال: أخشى أن يُعطي الكتاب مظهراً شعبياً بينما الجمهور أكاديمي. أو: هذا الكتاب كُتب في ظروف صعبة وأريد أن يشعر القارئ بعمق ما وراءه..." style="min-height:140px;" maxlength="600" oninput="updateCounter('keyQuestionInput','keyCount')" required></textarea>
+      <textarea name="السؤال_الجوهري" id="keyQuestionInput" placeholder="مثال: أخشى أن يُعطي الكتاب مظهراً شعبياً بينما الجمهور أكاديمي. أو: هذا الكتاب كُتب في ظروف صعبة وأريد أن يشعر القارئ بعمق ما وراءه..." style="min-height:140px;" maxlength="600" oninput="updateCounter('keyQuestionInput','keyCount')"></textarea>
       <div class="char-counter"><span id="keyCount">0</span> / 600</div>
     </div>
 
@@ -1083,7 +1071,6 @@ input[type="checkbox"].hidden-check {
 
 </form>
 
-<!-- ════════ SUCCESS ════════ -->
 <div class="success-screen" id="successScreen">
   <div class="success-icon">📬</div>
   <h2>وصل البريف بنجاح!</h2>
@@ -1091,9 +1078,7 @@ input[type="checkbox"].hidden-check {
   <div class="success-badge">A2BOOK · هندسة تجربة الكتاب</div>
 </div>
 
-</div><!-- end .main -->
-
-<footer class="site-footer">
+</div><footer class="site-footer">
   <span>A2BOOK</span> Studio · هندسة تجربة الكتاب العربي · جميع الحقوق محفوظة 2026
 </footer>
 
@@ -1106,18 +1091,23 @@ const selectedService = { value: '' };
 // ── STARS ──
 (function createStars() {
   const container = document.getElementById('starsContainer');
-  for (let i = 0; i < 30; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    star.style.cssText = `top:${Math.random()*100}%;left:${Math.random()*100}%;opacity:${Math.random()*0.4+0.1};`;
-    container.appendChild(star);
+  if (container) {
+    for (let i = 0; i < 30; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.cssText = `top:${Math.random()*100}%;left:${Math.random()*100}%;opacity:${Math.random()*0.4+0.1};`;
+      container.appendChild(star);
+    }
   }
 })();
 
 // ── PROGRESS ──
 function updateProgress() {
-  const pct = (currentScreen / (TOTAL_SCREENS - 1)) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
+  const progressFill = document.getElementById('progressFill');
+  if (progressFill) {
+    const pct = (currentScreen / (TOTAL_SCREENS - 1)) * 100;
+    progressFill.style.width = pct + '%';
+  }
   document.querySelectorAll('.hero-step').forEach((el, i) => {
     el.classList.remove('active','done');
     if (i === currentScreen) el.classList.add('active');
@@ -1127,13 +1117,20 @@ function updateProgress() {
 
 // ── SCREEN NAVIGATION ──
 function showScreen(n) {
+  // التحقق من الحقول قبل السماح بالانتقال العشوائي عبر شريط الهيدر
+  if (n > currentScreen) {
+    for (let i = currentScreen; i < n; i++) {
+      if (!validateScreen(i)) return;
+    }
+  }
   document.querySelectorAll('.screen').forEach((s,i) => {
     s.classList.toggle('active', i === n);
   });
   document.getElementById('successScreen').classList.remove('active');
   currentScreen = n;
   updateProgress();
-  window.scrollTo({ top: document.getElementById('siteHeader').offsetTop, behavior: 'smooth' });
+  const siteHeader = document.getElementById('siteHeader');
+  if (siteHeader) window.scrollTo({ top: siteHeader.offsetTop, behavior: 'smooth' });
 }
 
 function nextScreen(from) {
@@ -1161,6 +1158,23 @@ function validateScreen(n) {
       return false;
     }
   }
+  if (n === 2) {
+    const bookTitle = document.getElementById('f_booktitle').value.trim();
+    const coreIdea = document.getElementById('coreIdeaInput').value.trim();
+    if (!bookTitle || !coreIdea) {
+      alert('يرجى ملء عنوان الكتاب والفكرة المحورية قبل الانتقال');
+      return false;
+    }
+  }
+  if (n === 3) {
+    if (selectedService.value !== 'cover') {
+      const bookType = document.getElementById('f_booktype').value;
+      if (!bookType) {
+        alert('يرجى تحديد طبيعة محتوى الكتاب');
+        return false;
+      }
+    }
+  }
   return true;
 }
 
@@ -1169,7 +1183,10 @@ function selectChoice(el, groupId, hiddenId) {
   document.querySelectorAll(`#${groupId} .choice-card`).forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   const val = el.dataset.value;
-  if (hiddenId) document.getElementById(hiddenId).value = val;
+  if (hiddenId) {
+    const hiddenEl = document.getElementById(hiddenId);
+    if (hiddenEl) hiddenEl.value = val;
+  }
   if (groupId === 'serviceGrid') {
     selectedService.value = val;
     updateCoverVisibility(val);
@@ -1178,10 +1195,12 @@ function selectChoice(el, groupId, hiddenId) {
 
 function updateCoverVisibility(service) {
   const coverSection = document.getElementById('coverSection');
-  if (service === 'interior') {
-    coverSection.classList.add('hidden');
-  } else {
-    coverSection.classList.remove('hidden');
+  if (coverSection) {
+    if (service === 'interior') {
+      coverSection.classList.add('hidden');
+    } else {
+      coverSection.classList.remove('hidden');
+    }
   }
 }
 
@@ -1190,8 +1209,14 @@ function selectPill(el, groupId, hiddenId) {
   document.querySelectorAll(`#${groupId} .pill`).forEach(p => p.classList.remove('selected'));
   el.classList.add('selected');
   const val = el.dataset.value;
-  if (hiddenId) document.getElementById(hiddenId).value = val;
-  if (groupId === 'sourceGroup') document.getElementById('f_source').value = val;
+  if (hiddenId) {
+    const hiddenEl = document.getElementById(hiddenId);
+    if (hiddenEl) hiddenEl.value = val;
+  }
+  if (groupId === 'sourceGroup') {
+    const sourceEl = document.getElementById('f_source');
+    if (sourceEl) sourceEl.value = val;
+  }
 }
 
 // ── PILLS (multi select) ──
@@ -1199,14 +1224,17 @@ function multiPill(el, groupId, hiddenId) {
   el.classList.toggle('selected');
   const vals = [];
   document.querySelectorAll(`#${groupId} .pill.selected`).forEach(p => vals.push(p.dataset.value));
-  if (hiddenId) document.getElementById(hiddenId).value = vals.join(' | ');
+  if (hiddenId) {
+    const hiddenEl = document.getElementById(hiddenId);
+    if (hiddenEl) hiddenEl.value = vals.join(' | ');
+  }
 }
 
 // ── TOGGLE BUTTONS (single select) ──
 function toggleBtn(el, group) {
   document.querySelectorAll(`[data-group="${group}"]`).forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
-  const hiddenMap = { 'prevwork-group': 'f_prevwork', 'priority-group': 'f_priority' };
+  const hiddenMap = { 'prevwork-group': 'f_prevwork', 'priority-group': 'f_priority_hidden' };
   const hiddenId = hiddenMap[group];
   if (hiddenId) {
     const hidden = document.getElementById(hiddenId);
@@ -1214,11 +1242,7 @@ function toggleBtn(el, group) {
   }
   if (group === 'prevwork-group') {
     const badExp = document.getElementById('badExpGroup');
-    badExp.style.display = el.dataset.value.includes('سلبية') ? 'block' : 'none';
-  }
-  if (group === 'priority-group') {
-    document.getElementById('f_priority_hidden').value = el.dataset.value;
-    document.getElementById('f_priority').value = el.dataset.value;
+    if (badExp) badExp.style.display = el.dataset.value.includes('سلبية') ? 'block' : 'none';
   }
 }
 
@@ -1227,25 +1251,33 @@ function toggleCheck(el, groupId, hiddenId) {
   el.classList.toggle('selected');
   const vals = [];
   document.querySelectorAll(`#${groupId} .check-item.selected .check-label`).forEach(l => vals.push(l.textContent.trim()));
-  if (hiddenId) document.getElementById(hiddenId).value = vals.join(' | ') || 'لا يوجد';
+  if (hiddenId) {
+    const hiddenEl = document.getElementById(hiddenId);
+    if (hiddenEl) hiddenEl.value = vals.join(' | ') || 'لا يوجد';
+  }
 }
 
 // ── CHAR COUNTER ──
 function updateCounter(inputId, counterId) {
-  const len = document.getElementById(inputId).value.length;
-  document.getElementById(counterId).textContent = len;
+  const inputEl = document.getElementById(inputId);
+  const counterEl = document.getElementById(counterId);
+  if (inputEl && counterEl) {
+    counterEl.textContent = inputEl.value.length;
+  }
 }
 
 // ── SYNC REPLY EMAIL ──
 function syncReply() {
-  document.getElementById('f_replyto').value = document.getElementById('f_email').value;
+  const emailEl = document.getElementById('f_email');
+  const replyEl = document.getElementById('f_replyto');
+  if (emailEl && replyEl) replyEl.value = emailEl.value;
 }
 
 // ── PREPARE SUBMIT ──
 function prepareSubmit() {
-  // sync size field
   const sizeEl = document.getElementById('sizeSelect');
-  if (sizeEl) document.getElementById('f_size').value = sizeEl.value;
+  const sizeHidden = document.getElementById('f_size');
+  if (sizeEl && sizeHidden) sizeHidden.value = sizeEl.value;
 }
 
 // ── FORM SUBMIT HANDLER ──
@@ -1256,7 +1288,6 @@ document.getElementById('briefForm').addEventListener('submit', function(e) {
     alert('يرجى الإجابة على السؤال الجوهري الأخير');
     return;
   }
-  // Formspree will handle the redirect; but we intercept for UX
   e.preventDefault();
   const form = this;
   const data = new FormData(form);
@@ -1268,6 +1299,7 @@ document.getElementById('briefForm').addEventListener('submit', function(e) {
   .then(res => {
     if (res.ok) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('successScreen').add('active'); // تم إصلاحها للاتساق
       document.getElementById('successScreen').classList.add('active');
       document.getElementById('progressFill').style.width = '100%';
       document.querySelectorAll('.hero-step').forEach(s => s.classList.add('done'));
@@ -1286,156 +1318,6 @@ document.getElementById('briefForm').addEventListener('submit', function(e) {
 
 // ── INIT ──
 updateProgress();
-</script>
-  <script>
-// تحديد الشاشة الحالية
-let currentStep = 0;
-const totalSteps = 5; // من 0 إلى 5 (6 شاشات)
-
-// دالة الانتقال للشاشة التالية مع التحقق من الحقول المطلوبة
-function nextScreen(step) {
-    let currentScreen = document.getElementById('screen-' + step);
-    
-    // التحقق من الحقول المطلوبة داخل الشاشة الحالية فقط قبل الانتقال
-    let requiredInputs = currentScreen.querySelectorAll('[required]');
-    for (let input of requiredInputs) {
-        if (!input.value.trim()) {
-            alert('يرجى تعبئة الحقول المطلوبة أولاً باللون الأحمر (*)');
-            input.focus();
-            return;
-        }
-    }
-
-    // الانتقال للشاشة التالية
-    let nextStep = step + 1;
-    let nextScreen = document.getElementById('screen-' + nextStep);
-    
-    if (nextScreen) {
-        currentScreen.classList.remove('active');
-        nextScreen.classList.add('active');
-        
-        // تحديث أشرطة الخطوات في الهيدر
-        updateStepsUI(nextStep);
-        window.scrollTo(0, 0);
-        currentStep = nextStep;
-    }
-}
-
-// دالة العودة للشاشة السابقة
-function prevScreen(step) {
-    let currentScreen = document.getElementById('screen-' + step);
-    let prevStep = step - 1;
-    let prevScreen = document.getElementById('screen-' + prevStep);
-    
-    if (prevScreen) {
-        currentScreen.classList.remove('active');
-        prevScreen.classList.add('active');
-        
-        updateStepsUI(prevStep);
-        window.scrollTo(0, 0);
-        currentStep = prevStep;
-    }
-}
-
-// تحديث واجهة الخطوات وشريط التقدم البرتقالي
-function updateStepsUI(step) {
-    // تحديث شريط التقدم البرتقالي العلوي
-    let progressPercent = (step / totalSteps) * 100;
-    document.getElementById('progressFill').style.width = progressPercent + '%';
-    
-    // تحديث شكل الخطوات في الهيدر (①, ②, ③...)
-    let steps = document.querySelectorAll('.hero-step');
-    steps.forEach((stepElement, index) => {
-        if (index === step) {
-            stepElement.className = 'hero-step active';
-        } else if (index < step) {
-            stepElement.className = 'hero-step done';
-        } else {
-            stepElement.className = 'hero-step';
-        }
-    });
-}
-
-// دالة اختيار كروت الخدمات
-function selectChoice(element, gridId, hiddenInputId) {
-    let grid = document.getElementById(gridId);
-    let cards = grid.getElementsByClassName('choice-card');
-    for (let card of cards) {
-        card.classList.remove('selected');
-    }
-    element.classList.add('selected');
-    document.getElementById(hiddenInputId).value = element.getAttribute('data-value');
-}
-
-// دالة اختيار الأزرار الدائرية الصغيرة (Pills)
-function selectPill(element, groupId, hiddenInputId) {
-    let group = document.getElementById(groupId);
-    let pills = group.getElementsByClassName('pill');
-    for (let pill of pills) {
-        pill.classList.remove('selected');
-    }
-    element.classList.add('selected');
-    document.getElementById(hiddenInputId).value = element.getAttribute('data-value');
-}
-
-// دالة الاختيارات المتعددة (Pills المتعددة)
-function multiPill(element, groupId, hiddenInputId) {
-    element.classList.toggle('selected');
-    let group = document.getElementById(groupId);
-    let selectedPills = group.getElementsByClassName('pill selected');
-    let values = [];
-    for (let pill of selectedPills) {
-        values.push(pill.getAttribute('data-value'));
-    }
-    document.getElementById(hiddenInputId).value = values.join(', ');
-}
-
-// دالة مربعات الاختيار (Checkboxes) للخطوة الرابعة
-function toggleCheck(element, groupId, hiddenInputId) {
-    element.classList.toggle('selected');
-    let group = document.getElementById(groupId);
-    let selectedItems = group.getElementsByClassName('check-item selected');
-    let values = [];
-    for (let item of selectedItems) {
-        let label = item.querySelector('.check-label').innerText;
-        values.push(label);
-    }
-    document.getElementById(hiddenInputId).value = values.join(' | ');
-}
-
-// دالة أزرار نعم / لا (Toggle Buttons)
-function toggleBtn(element, groupClass) {
-    let buttons = document.querySelectorAll(`[data-group="${groupClass}"]`);
-    buttons.forEach(btn => btn.classList.remove('selected'));
-    element.classList.add('selected');
-    document.getElementById('f_prevwork').value = element.getAttribute('data-value');
-    
-    // إظهار حقل الملاحظات إذا كانت التجربة السابقة سلبية
-    let badExp = document.getElementById('badExpGroup');
-    if (badExp) {
-        if (element.getAttribute('data-value').includes('سلبية')) {
-            badExp.style.display = 'block';
-        } else {
-            badExp.style.display = 'none';
-        }
-    }
-}
-
-// تحديث عداد الحروف للفكرة المحورية
-function updateCounter(inputId, counterId) {
-    let input = document.getElementById(inputId);
-    let counter = document.getElementById(counterId);
-    counter.innerText = input.value.length;
-}
-
-// ربط إيميل العميل بخاصية الرد التلقائي للفورم
-function syncReply() {
-    let emailVal = document.getElementById('f_email').value;
-    document.getElementById('f_replyto').value = emailVal;
-}
-
-// تهيئة شريط التقدم عند أول تحميل للصفحة
-updateStepsUI(0);
 </script>
 </body>
 </html>
