@@ -1287,5 +1287,155 @@ document.getElementById('briefForm').addEventListener('submit', function(e) {
 // ── INIT ──
 updateProgress();
 </script>
+  <script>
+// تحديد الشاشة الحالية
+let currentStep = 0;
+const totalSteps = 5; // من 0 إلى 5 (6 شاشات)
+
+// دالة الانتقال للشاشة التالية مع التحقق من الحقول المطلوبة
+function nextScreen(step) {
+    let currentScreen = document.getElementById('screen-' + step);
+    
+    // التحقق من الحقول المطلوبة داخل الشاشة الحالية فقط قبل الانتقال
+    let requiredInputs = currentScreen.querySelectorAll('[required]');
+    for (let input of requiredInputs) {
+        if (!input.value.trim()) {
+            alert('يرجى تعبئة الحقول المطلوبة أولاً باللون الأحمر (*)');
+            input.focus();
+            return;
+        }
+    }
+
+    // الانتقال للشاشة التالية
+    let nextStep = step + 1;
+    let nextScreen = document.getElementById('screen-' + nextStep);
+    
+    if (nextScreen) {
+        currentScreen.classList.remove('active');
+        nextScreen.classList.add('active');
+        
+        // تحديث أشرطة الخطوات في الهيدر
+        updateStepsUI(nextStep);
+        window.scrollTo(0, 0);
+        currentStep = nextStep;
+    }
+}
+
+// دالة العودة للشاشة السابقة
+function prevScreen(step) {
+    let currentScreen = document.getElementById('screen-' + step);
+    let prevStep = step - 1;
+    let prevScreen = document.getElementById('screen-' + prevStep);
+    
+    if (prevScreen) {
+        currentScreen.classList.remove('active');
+        prevScreen.classList.add('active');
+        
+        updateStepsUI(prevStep);
+        window.scrollTo(0, 0);
+        currentStep = prevStep;
+    }
+}
+
+// تحديث واجهة الخطوات وشريط التقدم البرتقالي
+function updateStepsUI(step) {
+    // تحديث شريط التقدم البرتقالي العلوي
+    let progressPercent = (step / totalSteps) * 100;
+    document.getElementById('progressFill').style.width = progressPercent + '%';
+    
+    // تحديث شكل الخطوات في الهيدر (①, ②, ③...)
+    let steps = document.querySelectorAll('.hero-step');
+    steps.forEach((stepElement, index) => {
+        if (index === step) {
+            stepElement.className = 'hero-step active';
+        } else if (index < step) {
+            stepElement.className = 'hero-step done';
+        } else {
+            stepElement.className = 'hero-step';
+        }
+    });
+}
+
+// دالة اختيار كروت الخدمات
+function selectChoice(element, gridId, hiddenInputId) {
+    let grid = document.getElementById(gridId);
+    let cards = grid.getElementsByClassName('choice-card');
+    for (let card of cards) {
+        card.classList.remove('selected');
+    }
+    element.classList.add('selected');
+    document.getElementById(hiddenInputId).value = element.getAttribute('data-value');
+}
+
+// دالة اختيار الأزرار الدائرية الصغيرة (Pills)
+function selectPill(element, groupId, hiddenInputId) {
+    let group = document.getElementById(groupId);
+    let pills = group.getElementsByClassName('pill');
+    for (let pill of pills) {
+        pill.classList.remove('selected');
+    }
+    element.classList.add('selected');
+    document.getElementById(hiddenInputId).value = element.getAttribute('data-value');
+}
+
+// دالة الاختيارات المتعددة (Pills المتعددة)
+function multiPill(element, groupId, hiddenInputId) {
+    element.classList.toggle('selected');
+    let group = document.getElementById(groupId);
+    let selectedPills = group.getElementsByClassName('pill selected');
+    let values = [];
+    for (let pill of selectedPills) {
+        values.push(pill.getAttribute('data-value'));
+    }
+    document.getElementById(hiddenInputId).value = values.join(', ');
+}
+
+// دالة مربعات الاختيار (Checkboxes) للخطوة الرابعة
+function toggleCheck(element, groupId, hiddenInputId) {
+    element.classList.toggle('selected');
+    let group = document.getElementById(groupId);
+    let selectedItems = group.getElementsByClassName('check-item selected');
+    let values = [];
+    for (let item of selectedItems) {
+        let label = item.querySelector('.check-label').innerText;
+        values.push(label);
+    }
+    document.getElementById(hiddenInputId).value = values.join(' | ');
+}
+
+// دالة أزرار نعم / لا (Toggle Buttons)
+function toggleBtn(element, groupClass) {
+    let buttons = document.querySelectorAll(`[data-group="${groupClass}"]`);
+    buttons.forEach(btn => btn.classList.remove('selected'));
+    element.classList.add('selected');
+    document.getElementById('f_prevwork').value = element.getAttribute('data-value');
+    
+    // إظهار حقل الملاحظات إذا كانت التجربة السابقة سلبية
+    let badExp = document.getElementById('badExpGroup');
+    if (badExp) {
+        if (element.getAttribute('data-value').includes('سلبية')) {
+            badExp.style.display = 'block';
+        } else {
+            badExp.style.display = 'none';
+        }
+    }
+}
+
+// تحديث عداد الحروف للفكرة المحورية
+function updateCounter(inputId, counterId) {
+    let input = document.getElementById(inputId);
+    let counter = document.getElementById(counterId);
+    counter.innerText = input.value.length;
+}
+
+// ربط إيميل العميل بخاصية الرد التلقائي للفورم
+function syncReply() {
+    let emailVal = document.getElementById('f_email').value;
+    document.getElementById('f_replyto').value = emailVal;
+}
+
+// تهيئة شريط التقدم عند أول تحميل للصفحة
+updateStepsUI(0);
+</script>
 </body>
 </html>
