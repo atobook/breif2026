@@ -552,772 +552,124 @@ input[type="checkbox"].hidden-check {
   background: rgba(255,255,255,0.25);
   border-radius: 50%;
 }
-
-/* hidden inputs for form data */
-.data-input { display: none !important; }
-</style>
-</head>
-<body>
-
-<div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
-
-<header class="hero" id="siteHeader">
-  <div class="hero-stars" id="starsContainer"></div>
-  <div class="hero-logo">A2BOOK STUDIO · هندسة تجربة الكتاب</div>
-  <h1>بريف المشروع</h1>
-  <p class="hero-sub">كل إجابة هنا تُترجَم مباشرة إلى قرار تصميمي — خذ وقتك</p>
-  <div class="hero-steps" id="stepsNav">
-    <div class="hero-step active" data-step="0" onclick="showScreen(0)"><span class="hero-step-num">①</span>الخدمة</div>
-    <div class="hero-step" data-step="1" onclick="showScreen(1)"><span class="hero-step-num">②</span>عن نفسك</div>
-    <div class="hero-step" data-step="2" onclick="showScreen(2)"><span class="hero-step-num">③</span>عن الكتاب</div>
-    <div class="hero-step" data-step="3" onclick="showScreen(3)"><span class="hero-step-num">④</span>التصميم</div>
-    <div class="hero-step" data-step="4" onclick="showScreen(4)"><span class="hero-step-num">⑤</span>التوقعات</div>
-    <div class="hero-step" data-step="5" onclick="showScreen(5)"><span class="hero-step-num">⑥</span>الإرسال</div>
-  </div>
-</header>
-
-<div class="main">
-
-<form id="briefForm" action="https://formspree.io/a2bookstudio@gmail.com" method="POST">
-
-  <input type="hidden" name="_subject" value="A2BOOK Brief جديد">
-  <input type="hidden" name="_replyto" id="f_replyto">
-  <input type="hidden" name="نوع_الخدمة" id="f_service">
-  <input type="hidden" name="نوع_الكتاب" id="f_booktype">
-  <input type="hidden" name="عناصر_خاصة" id="f_elements">
-  <input type="hidden" name="حجم_الكتاب" id="f_size">
-  <input type="hidden" name="طريقة_النشر" id="f_publish">
-  <input type="hidden" name="توجه_الغلاف" id="f_coverstyle">
-  <input type="hidden" name="خيارات_الغلاف" id="f_coveropts">
-  <input type="hidden" name="مستوى_الجهوزية" id="f_readiness">
-  <input type="hidden" name="الميزانية_التقريبية" id="f_budget">
-  <input type="hidden" name="الأولوية" id="f_priority_hidden">
-
-  <div class="screen active" id="screen-0">
-    <div class="screen-header">
-      <div class="screen-tag">الخطوة الأولى</div>
-      <h2 class="screen-title">ما الخدمة التي تحتاجها؟</h2>
-      <p class="screen-desc">سيُحدد هذا الاختيار الأسئلة الظاهرة في الخطوات التالية — اختر ما يناسب مشروعك الآن.</p>
-    </div>
-
-    <div class="field-group">
-      <div class="choice-grid" id="serviceGrid">
-        <div class="choice-card" data-value="full" onclick="selectChoice(this,'serviceGrid','f_service')">
-          <span class="choice-icon">📚</span>
-          <div class="choice-name">خدمة كاملة</div>
-          <div class="choice-desc">غلاف خارجي احترافي + تنسيق داخلي كامل — الأنسب لمن يبدأ من الصفر</div>
-        </div>
-        <div class="choice-card" data-value="interior" onclick="selectChoice(this,'serviceGrid','f_service')">
-          <span class="choice-icon">📄</span>
-          <div class="choice-name">تنسيق داخلي فقط</div>
-          <div class="choice-desc">لديّ غلاف بالفعل أو لا أحتاجه — أريد تنسيق صفحات الكتاب فقط</div>
-        </div>
-        <div class="choice-card" data-value="cover" onclick="selectChoice(this,'serviceGrid','f_service')">
-          <span class="choice-icon">🎨</span>
-          <div class="choice-name">غلاف فقط</div>
-          <div class="choice-desc">أحتاج تصميم غلاف احترافي — التنسيق الداخلي لدي أو سيُنجز لاحقاً</div>
-        </div>
-        <div class="choice-card" data-value="consult" onclick="selectChoice(this,'serviceGrid','f_service')">
-          <span class="choice-icon">💡</span>
-          <div class="choice-name">استشارة وتقييم</div>
-          <div class="choice-desc">أريد رأي متخصص في مخطوطتي وتوجيه بصري — قبل اتخاذ أي قرار</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="nav-bar">
-      <div></div>
-      <button type="button" class="btn-next" onclick="nextScreen(0)" id="btn0">
-        التالي <span>←</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-1">
-    <div class="screen-header">
-      <div class="screen-tag">الخطوة الثانية</div>
-      <h2 class="screen-title">تعريف بسيط عنك</h2>
-      <p class="screen-desc">نعاملك كشريك في المشروع — ليس كعميل فقط. هذه المعلومات تساعدنا على فهم سياقك.</p>
-    </div>
-
-    <div class="field-row">
-      <div class="field-group">
-        <label class="field-label">الاسم الكامل <span class="field-required">*</span></label>
-        <input type="text" name="الاسم_الكامل" id="f_name" placeholder="اسمك كما تريده على التواصل">
-      </div>
-      <div class="field-group">
-        <label class="field-label">البريد الإلكتروني <span class="field-required">*</span></label>
-        <input type="email" name="البريد_الإلكتروني" id="f_email" placeholder="email@example.com" oninput="syncReply()">
-      </div>
-    </div>
-
-    <div class="field-row">
-      <div class="field-group">
-        <label class="field-label">رقم واتساب</label>
-        <input type="tel" name="واتساب" placeholder="مثال: 00966501234567">
-      </div>
-      <div class="field-group">
-        <label class="field-label">البلد</label>
-        <select name="البلد">
-          <option value="">اختر بلدك</option>
-          <option>المملكة العربية السعودية</option>
-          <option>مصر</option>
-          <option>الإمارات</option>
-          <option>الكويت</option>
-          <option>قطر</option>
-          <option>البحرين</option>
-          <option>عُمان</option>
-          <option>الأردن</option>
-          <option>لبنان</option>
-          <option>العراق</option>
-          <option>ليبيا</option>
-          <option>تونس</option>
-          <option>الجزائر</option>
-          <option>المغرب</option>
-          <option>دولة أخرى</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="field-group">
-      <label class="field-label">هل سبق أن تعاملت مع مصمم كتاب من قبل؟</label>
-      <div class="toggle-group">
-        <div class="toggle-btn" onclick="toggleBtn(this,'prevwork-group')" data-group="prevwork-group" data-value="نعم — تجربة إيجابية">نعم، وكانت إيجابية ✓</div>
-        <div class="toggle-btn" onclick="toggleBtn(this,'prevwork-group')" data-group="prevwork-group" data-value="نعم — تجربة سلبية">نعم، لكنها لم تكن جيدة</div>
-        <div class="toggle-btn" onclick="toggleBtn(this,'prevwork-group')" data-group="prevwork-group" data-value="لا — أول مرة">لا، هذه أول مرة</div>
-      </div>
-      <input type="hidden" name="تجربة_سابقة" id="f_prevwork">
-    </div>
-
-    <div class="field-group" id="badExpGroup" style="display:none">
-      <label class="field-label">ما الذي لم يعجبك في التجربة السابقة؟</label>
-      <span class="field-hint">معرفة هذا يساعدنا على تجنب نفس المشكلة معك تماماً</span>
-      <textarea name="ملاحظة_التجربة_السابقة" placeholder="مثال: لم يلتزم بالمواعيد / لم يفهم طبيعة محتوى الكتاب / لم يكن يشرح قراراته..."></textarea>
-    </div>
-
-    <div class="nav-bar">
-      <button type="button" class="btn-back" onclick="prevScreen(1)">→ السابق</button>
-      <button type="button" class="btn-next" onclick="nextScreen(1)">التالي <span>←</span></button>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-2">
-    <div class="screen-header">
-      <div class="screen-tag">الخطوة الثالثة</div>
-      <h2 class="screen-title">أخبرنا عن كتابك</h2>
-      <p class="screen-desc">هنا نبدأ في بناء صورة واضحة عن المشروع قبل أي قرار تصميمي.</p>
-    </div>
-
-    <div class="field-row">
-      <div class="field-group">
-        <label class="field-label">عنوان الكتاب <span class="field-required">*</span></label>
-        <input type="text" name="عنوان_الكتاب" id="f_booktitle" placeholder="العنوان النهائي أو المقترح">
-      </div>
-      <div class="field-group">
-        <label class="field-label">التصنيف الرئيسي</label>
-        <select name="التصنيف">
-          <option value="">— اختر —</option>
-          <option>تطوير الذات والتحفيز</option>
-          <option>أعمال وريادة أعمال</option>
-          <option>علم النفس والسلوك</option>
-          <option>الإدارة والقيادة</option>
-          <option>رواية وقصة</option>
-          <option>فلسفة وفكر</option>
-          <option>ديني وإسلامي</option>
-          <option>كتاب أكاديمي وبحثي</option>
-          <option>كتاب تعليمي ومناهج</option>
-          <option>ديوان شعر</option>
-          <option>سيرة ذاتية</option>
-          <option>تاريخ وحضارة</option>
-          <option>صحة وعلوم</option>
-          <option>تصنيف آخر</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">في جملة واحدة — ما الفكرة المحورية للكتاب؟ <span class="field-required">*</span></label>
-      <span class="field-hint">لا تلخّص — قُل ما يريد القارئ أن يعيشه بعد قراءته</span>
-      <textarea name="الفكرة_المحورية" id="coreIdeaInput" placeholder="مثال: كيف تستعيد تركيزك الحقيقي في عالم مليء بالضجيج..." maxlength="300" oninput="updateCounter('coreIdeaInput','coreIdeaCount')"></textarea>
-      <div class="char-counter"><span id="coreIdeaCount">0</span> / 300</div>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">من هو القارئ المثالي لهذا الكتاب؟</label>
-      <input type="text" name="القارئ_المثالي" placeholder="مثال: مدير في الثلاثينيات يبحث عن التوازن بين العمل والحياة">
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="field-group">
-      <label class="field-label">ما مستوى جهوزية المخطوطة؟</label>
-      <div class="pill-group" id="readinessGroup">
-        <div class="pill" data-value="مكتملة ومراجعة" onclick="selectPill(this,'readinessGroup','f_readiness')">مكتملة ومراجعة ✓</div>
-        <div class="pill" data-value="مكتملة — تحتاج مراجعة لغوية" onclick="selectPill(this,'readinessGroup','f_readiness')">مكتملة — تحتاج مراجعة لغوية</div>
-        <div class="pill" data-value="قيد الإنهاء" onclick="selectPill(this,'readinessGroup','f_readiness')">قيد الإنهاء (80%+)</div>
-        <div class="pill" data-value="مرحلة مبكرة" onclick="selectPill(this,'readinessGroup','f_readiness')">مرحلة مبكرة</div>
-      </div>
-    </div>
-
-    <div class="field-row">
-      <div class="field-group">
-        <label class="field-label">عدد الصفحات التقريبي للمخطوطة</label>
-        <input type="number" name="عدد_الصفحات" placeholder="مثال: 220" min="1">
-      </div>
-      <div class="field-group">
-        <label class="field-label">الكتاب سيُنشر عبر</label>
-        <div class="pill-group" id="publishGroup" style="margin-top:12px">
-          <div class="pill" data-value="طباعة تقليدية" onclick="selectPill(this,'publishGroup','f_publish')">طباعة 🖨</div>
-          <div class="pill" data-value="رقمي PDF" onclick="selectPill(this,'publishGroup','f_publish')">رقمي 📱</div>
-          <div class="pill" data-value="طباعة ورقمي" onclick="selectPill(this,'publishGroup','f_publish')">الاثنان</div>
-          <div class="pill" data-value="لم أقرر بعد" onclick="selectPill(this,'publishGroup','f_publish')">لم أقرر</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="nav-bar">
-      <button type="button" class="btn-back" onclick="prevScreen(2)">→ السابق</button>
-      <button type="button" class="btn-next" onclick="nextScreen(2)">التالي <span>←</span></button>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-3">
-    <div class="screen-header">
-      <div class="screen-tag">الخطوة الرابعة</div>
-      <h2 class="screen-title">تفاصيل التصميم</h2>
-      <p class="screen-desc">هنا نُترجم محتواك إلى قرارات بصرية — أجب بما تشعر به، لا بما تعرفه تقنياً.</p>
-    </div>
-
-    <div class="conditional-section" id="coverSection">
-      <div class="info-box">
-        <div class="info-box-icon">🎨</div>
-        <div><p><strong>قسم الغلاف الخارجي</strong><br>الغلاف هو أول ما يراه القارئ — كل قرار هنا يؤثر على الانطباع الأول.</p></div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">ما التوجه البصري الذي تريده للغلاف?</label>
-        <span class="field-hint">اختر ما يناسب روح كتابك — يمكن اختيار أكثر من واحد</span>
-        <div class="pill-group" id="coverStyleGroup">
-          <div class="pill" data-value="تايبوغرافي (النص هو الغلاف)" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">تايبوغرافي — النص بطل الغلاف</div>
-          <div class="pill" data-value="تصوير فوتوغرافي أو صورة" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">فوتوغرافي / صورة</div>
-          <div class="pill" data-value="توضيح ورسم يدوي" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">توضيح ورسم يدوي</div>
-          <div class="pill" data-value="تجريدي / هندسي" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">تجريدي / هندسي</div>
-          <div class="pill" data-value="أنيق ومنضبط" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">أنيق ومنضبط</div>
-          <div class="pill" data-value="جريء وملفت" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">جريء وملفت</div>
-          <div class="pill" data-value="دافئ وإنساني" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">دافئ وإنساني</div>
-          <div class="pill" data-value="غامق وعميق" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">غامق وعميق</div>
-          <div class="pill" data-value="مفتوح — اترك القرار للاستوديو" onclick="multiPill(this,'coverStyleGroup','f_coverstyle')">مفتوح — قرار الاستوديو</div>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">ألوان تريدها بالضرورة / ترفضها</label>
-        <input type="text" name="تفضيلات_الألوان" placeholder="مثال: أريد اللون الأزرق العميق. أرفض الأحمر الصارخ.">
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">روابط أمثلة على أغلفة تعجبك</label>
-        <span class="field-hint">Pinterest أو Google Images أو أي رابط — حتى لو كانت كتباً أجنبية</span>
-        <input type="text" name="أمثلة_أغلفة" placeholder="https://... أو صِف ما تريده بكلماتك">
-      </div>
-
-      <div class="divider"></div>
-    </div>
-
-    <div class="info-box">
-      <div class="info-box-icon">📄</div>
-      <div><p><strong>التنسيق الداخلي للكتاب</strong><br>القرارات هنا تحدد كيف يقرأ القارئ كتابك — وكم سيستمتع بالتجربة.</p></div>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">ما طبيعة محتوى كتابك؟ <span class="field-required">*</span></label>
-      <span class="field-hint">هذا يحدد نوع الشبكة الطباعية والخطوط والهرمية البصرية المناسبة</span>
-      <div class="choice-grid" id="bookTypeGrid" style="grid-template-columns: 1fr 1fr;">
-        <div class="choice-card" data-value="سردي متصل (رواية / قصة / سيرة ذاتية)" onclick="selectChoice(this,'bookTypeGrid','f_booktype')" style="padding:16px;">
-          <span class="choice-icon" style="font-size:24px">📖</span>
-          <div class="choice-name" style="font-size:14px">سردي متصل</div>
-          <div class="choice-desc">روايات، قصص، مذكرات، سيرة ذاتية — نص يجري بلا انقطاع</div>
-        </div>
-        <div class="choice-card" data-value="فكري ومقالي (عناوين ونقاط كثيرة)" onclick="selectChoice(this,'bookTypeGrid','f_booktype')" style="padding:16px;">
-          <span class="choice-icon" style="font-size:24px">💡</span>
-          <div class="choice-name" style="font-size:14px">فكري ومقالي</div>
-          <div class="choice-desc">تطوير ذات، أعمال، فلسفة — عناوين فرعية ونقاط وصناديق بصرية</div>
-        </div>
-        <div class="choice-card" data-value="أكاديمي وبحثي (جداول وهوامش معقدة)" onclick="selectChoice(this,'bookTypeGrid','f_booktype')" style="padding:16px;">
-          <span class="choice-icon" style="font-size:24px">🔬</span>
-          <div class="choice-name" style="font-size:14px">أكاديمي وبحثي</div>
-          <div class="choice-desc">بحوث، مناهج، مراجع — جداول وهوامش وتوثيق علمي</div>
-        </div>
-        <div class="choice-card" data-value="شعر وأدب" onclick="selectChoice(this,'bookTypeGrid','f_booktype')" style="padding:16px;">
-          <span class="choice-icon" style="font-size:24px">✍️</span>
-          <div class="choice-name" style="font-size:14px">شعر وأدب</div>
-          <div class="choice-desc">ديوان شعر، نثر أدبي — فراغ وإيقاع بصري مقصود</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">مقاس الكتاب المطلوب</label>
-      <span class="field-hint">إذا لم تكن متأكداً، الاختيار الافتراضي هو الأنسب لتصنيفك</span>
-      <select name="مقاس_الكتاب" id="sizeSelect" onchange="document.getElementById('f_size').value=this.value">
-        <option value="لا أعرف — اترك القرار للاستوديو">لا أعرف — اترك القرار للاستوديو (موصى به)</option>
-        <option value="14×21 سم — مقاس الروايات والكتب الأدبية">14×21 سم — روايات وكتب أدبية (الأكثر شيوعاً)</option>
-        <option value="17×24 سم — المقاس الوزيري الكبير">17×24 سم — كتب فكرية وغير خيالية (وزيري كبير)</option>
-        <option value="15×21 سم — مقاس متوسط بين الروايات والفكري">15×21 سم — متوسط بين الأدبي والفكري</option>
-        <option value="A5 (14.8×21 سم) — مناسب للأكاديمي والبحثي">A5 — أكاديمي وبحثي (قياسي عالمي)</option>
-        <option value="A4 (21×29.7 سم) — كتب مصورة ومناهج">A4 — كتب مصورة ومناهج (حجم كبير)</option>
-        <option value="مقاس مخصص">مقاس مخصص — سأحدده في خانة الملاحظات</option>
-      </select>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">هل الكتاب يحتوي على عناصر خاصة؟</label>
-      <span class="field-hint">اختر كل ما ينطبق — هذا يؤثر مباشرة على التعقيد التقني والتسعير</span>
-      <div class="check-list" id="elementsGroup">
-        <div class="check-item" onclick="toggleCheck(this,'elementsGroup','f_elements')">
-          <div class="check-box"></div>
-          <div>
-            <div class="check-label">آيات قرآنية كريمة وأحاديث نبوية</div>
-            <div class="check-note">تحتاج خطاً خاصاً وضبط إملائي دقيق ومراجعة شرعية للمتن</div>
-          </div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this,'elementsGroup','f_elements')">
-          <div class="check-box"></div>
-          <div>
-            <div class="check-label">حواشي سفلية أو هوامش بحثية</div>
-            <div class="check-note">هوامش علمية أو توثيق مراجع في أسفل الصفحات</div>
-          </div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this,'elementsGroup','f_elements')">
-          <div class="check-box"></div>
-          <div>
-            <div class="check-label">اقتباسات بارزة (Pull Quotes)</div>
-            <div class="check-note">جمل مميزة تُعرض بشكل لافت داخل الصفحة كأداة بصرية</div>
-          </div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this,'elementsGroup','f_elements')">
-          <div class="check-box"></div>
-          <div>
-            <div class="check-label">جداول ورسوم بيانية</div>
-            <div class="check-note">جداول مقارنة أو رسوم توضيحية داخل النص</div>
-          </div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this,'elementsGroup','f_elements')">
-          <div class="check-box"></div>
-          <div>
-            <div class="check-label">إنفوجرافيك وصور توضيحية</div>
-            <div class="check-note">رسومات مخصصة لشرح أفكار داخل الصفحات</div>
-          </div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this,'elementsGroup','f_elements')">
-          <div class="check-box"></div>
-          <div>
-            <div class="check-label">نص ثنائي اللغة (عربي وإنجليزي)</div>
-            <div class="check-note">محتوى يجمع بين العربية والإنجليزية في نفس الصفحات</div>
-          </div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this,'elementsGroup','f_elements')">
-          <div class="check-box"></div>
-          <div>
-            <div class="check-label">صور فوتوغرافية داخلية</div>
-            <div class="check-note">صور ضمن النص تحتاج معالجة وتحسين للطباعة</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">هل لديك تفضيل لنوع الخط العربي؟</label>
-      <div class="pill-group" id="fontPrefGroup">
-        <div class="pill" data-value="لا أعلم — اترك للاستوديو" onclick="selectPill(this,'fontPrefGroup','f_coveropts')">لا أعلم — اترك للاستوديو</div>
-        <div class="pill" data-value="نسخي — كلاسيكي وقابل للقراءة" onclick="selectPill(this,'fontPrefGroup','f_coveropts')">نسخي — كلاسيكي</div>
-        <div class="pill" data-value="حديث مبسّط — عصري ونظيف" onclick="selectPill(this,'fontPrefGroup','f_coveropts')">حديث مبسّط</div>
-        <div class="pill" data-value="رشيق خفيف — أنيق وخفيف" onclick="selectPill(this,'fontPrefGroup','f_coveropts')">رشيق خفيف</div>
-        <div class="pill" data-value="جريء وثقيل للكتب الفكرية" onclick="selectPill(this,'fontPrefGroup','f_coveropts')">جريء وثقيل</div>
-      </div>
-    </div>
-
-    <div class="nav-bar">
-      <button type="button" class="btn-back" onclick="prevScreen(3)">→ السابق</button>
-      <button type="button" class="btn-next" onclick="nextScreen(3)">التالي <span>←</span></button>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-4">
-    <div class="screen-header">
-      <div class="screen-tag">الخطوة الخامسة</div>
-      <h2 class="screen-title">التوقعات والإطار الزمني</h2>
-      <p class="screen-desc">وضوح التوقعات من البداية يحمي الطرفين — ويجعل التعاون أكثر متعة.</p>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">ما ميزانيتك التقريبية للمشروع؟</label>
-      <span class="field-hint">لا يوجد إجابة خاطئة — هذا يساعدنا على تقديم الباقة الأنسب لك</span>
-      <div class="choice-grid" id="budgetGrid" style="grid-template-columns: 1fr 1fr 1fr;">
-        <div class="choice-card" data-value="أقل من 500 دولار" onclick="selectChoice(this,'budgetGrid','f_budget')" style="padding:16px;text-align:center;">
-          <span class="choice-icon" style="font-size:22px">💰</span>
-          <div class="choice-name" style="font-size:13px">أقل من 500$</div>
-          <div class="choice-desc">للمشاريع المحدودة النطاق</div>
-        </div>
-        <div class="choice-card" data-value="500 — 1000 دولار" onclick="selectChoice(this,'budgetGrid','f_budget')" style="padding:16px;text-align:center;">
-          <span class="choice-icon" style="font-size:22px">💰💰</span>
-          <div class="choice-name" style="font-size:13px">500$ – 1,000$</div>
-          <div class="choice-desc">للكتب الاحترافية المتكاملة</div>
-        </div>
-        <div class="choice-card" data-value="1000 — 2000 دولار" onclick="selectChoice(this,'budgetGrid','f_budget')" style="padding:16px;text-align:center;">
-          <span class="choice-icon" style="font-size:22px">💰💰💰</span>
-          <div class="choice-name" style="font-size:13px">1,000$ – 2,000$</div>
-          <div class="choice-desc">للمشاريع التفصيلية الكاملة</div>
-        </div>
-        <div class="choice-card" data-value="أكثر من 2000 دولار" onclick="selectChoice(this,'budgetGrid','f_budget')" style="padding:16px;text-align:center;">
-          <span class="choice-icon" style="font-size:22px">✨</span>
-          <div class="choice-name" style="font-size:13px">أكثر من 2,000$</div>
-          <div class="choice-desc">للمشاريع المؤسسية والبريميوم</div>
-        </div>
-        <div class="choice-card" data-value="مفتوح — حسب العرض" onclick="selectChoice(this,'budgetGrid','f_budget')" style="padding:16px;text-align:center;grid-column:span 2;">
-          <span class="choice-icon" style="font-size:22px">🤝</span>
-          <div class="choice-name" style="font-size:13px">مفتوح — عرّفني على نفسك وسأرى</div>
-          <div class="choice-desc">أفضّل أن أرى العرض قبل تحديد ميزانية</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">أولويتك في هذا المشروع؟</label>
-      <div class="toggle-group">
-        <div class="toggle-btn" onclick="toggleBtn(this,'priority-group')" data-group="priority-group" data-value="الموعد — أحتاج التسليم سريعاً">الموعد أولاً ⚡</div>
-        <div class="toggle-btn" onclick="toggleBtn(this,'priority-group')" data-group="priority-group" data-value="الجودة — مهما استغرق">الجودة أولاً ✦</div>
-        <div class="toggle-btn" onclick="toggleBtn(this,'priority-group')" data-group="priority-group" data-value="التوازن بينهما">التوازن بينهما</div>
-      </div>
-    </div>
-
-    <div class="field-row">
-      <div class="field-group">
-        <label class="field-label">هل لديك موعد إطلاق محدد؟</label>
-        <input type="date" name="موعد_الإطلاق" style="direction:ltr;text-align:left;">
-      </div>
-      <div class="field-group">
-        <label class="field-label">كيف تفضل التواصل معنا؟</label>
-        <select name="طريقة_التواصل">
-          <option value="">— اختر —</option>
-          <option>واتساب (الأسرع)</option>
-          <option>البريد الإلكتروني</option>
-          <option>مكالمة فيديو (زووم / ميت)</option>
-          <option>أي طريقة تناسبكم</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="nav-bar">
-      <button type="button" class="btn-back" onclick="prevScreen(4)">→ السابق</button>
-      <button type="button" class="btn-next" onclick="nextScreen(4)">التالي <span>←</span></button>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-5">
-    <div class="screen-header">
-      <div class="screen-tag">الخطوة الأخيرة</div>
-      <h2 class="screen-title">السؤال الأهم</h2>
-      <p class="screen-desc">هذا السؤال وحده يساوي كل الأسئلة السابقة مجتمعة.</p>
-    </div>
-
-    <div class="warn-box">
-      <p>⚠️ هذا هو المكان الذي يجب أن تكون فيه صريحاً تماماً — إجابتك هنا ستحدد كيف نتعامل مع كل قرار تصميمي.</p>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">ما الذي تخشى ألا يفهمه المصمم عن كتابك؟ <span class="field-required">*</span></label>
-      <span class="field-hint">لا تُرضي المصمم — قُل ما يُقلقك فعلاً. كل كلمة تكتبها هنا تُترجَم لاحقاً في كل قرار بصري.</span>
-      <textarea name="السؤال_الجوهري" id="keyQuestionInput" placeholder="مثال: أخشى أن يُعطي الكتاب مظهراً شعبياً بينما الجمهور أكاديمي. أو: هذا الكتاب كُتب في ظروف صعبة وأريد أن يشعر القارئ بعمق ما وراءه..." style="min-height:140px;" maxlength="600" oninput="updateCounter('keyQuestionInput','keyCount')"></textarea>
-      <div class="char-counter"><span id="keyCount">0</span> / 600</div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="field-group">
-      <label class="field-label">هل هناك أي ملاحظات أو تفاصيل أخرى تريد إضافتها؟</label>
-      <textarea name="ملاحظات_إضافية" placeholder="أي شيء آخر تريد أن نعرفه — لا يوجد تفصيل صغير..."></textarea>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label">كيف وصلت إلينا؟</label>
-      <div class="pill-group" id="sourceGroup">
-        <div class="pill" data-value="إنستقرام" onclick="selectPill(this,'sourceGroup','')">إنستقرام</div>
-        <div class="pill" data-value="لينكدإن" onclick="selectPill(this,'sourceGroup','')">لينكدإن</div>
-        <div class="pill" data-value="توصية من شخص" onclick="selectPill(this,'sourceGroup','')">توصية شخصية</div>
-        <div class="pill" data-value="بحث على الإنترنت" onclick="selectPill(this,'sourceGroup','')">بحث على الإنترنت</div>
-        <div class="pill" data-value="رأيت عملاً منشوراً" onclick="selectPill(this,'sourceGroup','')">رأيت عملاً منشوراً</div>
-        <div class="pill" data-value="مصدر آخر" onclick="selectPill(this,'sourceGroup','')">مصدر آخر</div>
-      </div>
-      <input type="hidden" name="مصدر_المعرفة" id="f_source">
-    </div>
-
-    <div style="background:var(--paper-dark);border-radius:var(--radius);padding:20px 22px;margin:28px 0;text-align:center;">
-      <p style="font-size:13.5px;color:var(--muted);line-height:1.8;">
-        📖 سيصلك رد من فريق A2BOOK خلال <strong style="color:var(--navy)">24-48 ساعة</strong> بعد مراجعة البريف.<br>
-        <em style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--navy);">"الكتاب الجيد لا يُقرأ فقط — بل يُختبَر."</em>
-      </p>
-    </div>
-
-    <div class="nav-bar">
-      <button type="button" class="btn-back" onclick="prevScreen(5)">→ السابق</button>
-      <button type="submit" class="btn-submit" onclick="prepareSubmit()">
-        إرسال البريف ✦
-      </button>
-    </div>
-  </div>
-
-</form>
-
-<div class="success-screen" id="successScreen">
-  <div class="success-icon">📬</div>
-  <h2>وصل البريف بنجاح!</h2>
-  <p>شكراً على الوقت الذي منحتنا إياه — سيراجع الفريق بريفك ويعود إليك خلال 24-48 ساعة بعرض مفصّل.</p>
-  <div class="success-badge">A2BOOK · هندسة تجربة الكتاب</div>
-</div>
-
-</div><footer class="site-footer">
-  <span>A2BOOK</span> Studio · هندسة تجربة الكتاب العربي · جميع الحقوق محفوظة 2026
-</footer>
-
-<script>
-// ── STATE ──
-let currentScreen = 0;
-const TOTAL_SCREENS = 6;
-const selectedService = { value: '' };
-
-// ── STARS ──
-(function createStars() {
-  const container = document.getElementById('starsContainer');
-  if (container) {
-    for (let i = 0; i < 30; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.cssText = `top:${Math.random()*100}%;left:${Math.random()*100}%;opacity:${Math.random()*0.4+0.1};`;
-      container.appendChild(star);
-    }
-  }
-})();
-
-// ── PROGRESS ──
-function updateProgress() {
-  const progressFill = document.getElementById('progressFill');
-  if (progressFill) {
-    const pct = (currentScreen / (TOTAL_SCREENS - 1)) * 100;
-    progressFill.style.width = pct + '%';
-  }
-  document.querySelectorAll('.hero-step').forEach((el, i) => {
-    el.classList.remove('active','done');
-    if (i === currentScreen) el.classList.add('active');
-    else if (i < currentScreen) el.classList.add('done');
-  });
-}
-
-// ── SCREEN NAVIGATION ──
-function showScreen(n) {
-  // التحقق من الحقول قبل السماح بالانتقال العشوائي عبر شريط الهيدر
-  if (n > currentScreen) {
-    for (let i = currentScreen; i < n; i++) {
-      if (!validateScreen(i)) return;
-    }
-  }
-  document.querySelectorAll('.screen').forEach((s,i) => {
-    s.classList.toggle('active', i === n);
-  });
-  document.getElementById('successScreen').classList.remove('active');
-  currentScreen = n;
-  updateProgress();
-  const siteHeader = document.getElementById('siteHeader');
-  if (siteHeader) window.scrollTo({ top: siteHeader.offsetTop, behavior: 'smooth' });
-}
-
-function nextScreen(from) {
-  if (!validateScreen(from)) return;
-  showScreen(from + 1);
-}
-
-function prevScreen(from) {
-  if (from > 0) showScreen(from - 1);
-}
-
-// ── VALIDATION ──
-function validateScreen(n) {
-  if (n === 0) {
-    if (!selectedService.value) {
-      alert('يرجى اختيار نوع الخدمة أولاً');
-      return false;
-    }
-  }
-  if (n === 1) {
-    const name = document.getElementById('f_name').value.trim();
-    const email = document.getElementById('f_email').value.trim();
-    if (!name || !email) {
-      alert('يرجى ملء الاسم والبريد الإلكتروني');
-      return false;
-    }
-  }
-  if (n === 2) {
-    const bookTitle = document.getElementById('f_booktitle').value.trim();
-    const coreIdea = document.getElementById('coreIdeaInput').value.trim();
-    if (!bookTitle || !coreIdea) {
-      alert('يرجى ملء عنوان الكتاب والفكرة المحورية قبل الانتقال');
-      return false;
-    }
-  }
-  if (n === 3) {
-    if (selectedService.value !== 'cover') {
-      const bookType = document.getElementById('f_booktype').value;
-      if (!bookType) {
-        alert('يرجى تحديد طبيعة محتوى الكتاب');
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-// ── CHOICE CARDS (single select) ──
-function selectChoice(el, groupId, hiddenId) {
-  document.querySelectorAll(`#${groupId} .choice-card`).forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  const val = el.dataset.value;
-  if (hiddenId) {
-    const hiddenEl = document.getElementById(hiddenId);
-    if (hiddenEl) hiddenEl.value = val;
-  }
-  if (groupId === 'serviceGrid') {
-    selectedService.value = val;
-    updateCoverVisibility(val);
-  }
-}
-
-function updateCoverVisibility(service) {
-  const coverSection = document.getElementById('coverSection');
-  if (coverSection) {
-    if (service === 'interior') {
-      coverSection.classList.add('hidden');
-    } else {
-      coverSection.classList.remove('hidden');
-    }
-  }
-}
-
-// ── PILLS (single select) ──
-function selectPill(el, groupId, hiddenId) {
-  document.querySelectorAll(`#${groupId} .pill`).forEach(p => p.classList.remove('selected'));
-  el.classList.add('selected');
-  const val = el.dataset.value;
-  if (hiddenId) {
-    const hiddenEl = document.getElementById(hiddenId);
-    if (hiddenEl) hiddenEl.value = val;
-  }
-  if (groupId === 'sourceGroup') {
-    const sourceEl = document.getElementById('f_source');
-    if (sourceEl) sourceEl.value = val;
-  }
-}
-
-// ── PILLS (multi select) ──
-function multiPill(el, groupId, hiddenId) {
-  el.classList.toggle('selected');
-  const vals = [];
-  document.querySelectorAll(`#${groupId} .pill.selected`).forEach(p => vals.push(p.dataset.value));
-  if (hiddenId) {
-    const hiddenEl = document.getElementById(hiddenId);
-    if (hiddenEl) hiddenEl.value = vals.join(' | ');
-  }
-}
-
-// ── TOGGLE BUTTONS (single select) ──
-function toggleBtn(el, group) {
-  document.querySelectorAll(`[data-group="${group}"]`).forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
-  const hiddenMap = { 'prevwork-group': 'f_prevwork', 'priority-group': 'f_priority_hidden' };
-  const hiddenId = hiddenMap[group];
-  if (hiddenId) {
-    const hidden = document.getElementById(hiddenId);
-    if (hidden) hidden.value = el.dataset.value;
-  }
-  if (group === 'prevwork-group') {
-    const badExp = document.getElementById('badExpGroup');
-    if (badExp) badExp.style.display = el.dataset.value.includes('سلبية') ? 'block' : 'none';
-  }
-}
-
-// ── CHECKBOXES (multi select) ──
-function toggleCheck(el, groupId, hiddenId) {
-  el.classList.toggle('selected');
-  const vals = [];
-  document.querySelectorAll(`#${groupId} .check-item.selected .check-label`).forEach(l => vals.push(l.textContent.trim()));
-  if (hiddenId) {
-    const hiddenEl = document.getElementById(hiddenId);
-    if (hiddenEl) hiddenEl.value = vals.join(' | ') || 'لا يوجد';
-  }
-}
-
-// ── CHAR COUNTER ──
-function updateCounter(inputId, counterId) {
-  const inputEl = document.getElementById(inputId);
-  const counterEl = document.getElementById(counterId);
-  if (inputEl && counterEl) {
-    counterEl.textContent = inputEl.value.length;
-  }
-}
-
-// ── SYNC REPLY EMAIL ──
-function syncReply() {
-  const emailEl = document.getElementById('f_email');
-  const replyEl = document.getElementById('f_replyto');
-  if (emailEl && replyEl) replyEl.value = emailEl.value;
-}
-
-// ── PREPARE SUBMIT ──
+// ── PREPARE SUBMIT & MAILTO DIRECT SEND ──
 function prepareSubmit() {
   const sizeEl = document.getElementById('sizeSelect');
   const sizeHidden = document.getElementById('f_size');
   if (sizeEl && sizeHidden) sizeHidden.value = sizeEl.value;
 }
 
-// ── FORM SUBMIT HANDLER ──
+// ── FORM SUBMIT HANDLER (DIRECT MAILTO) ──
 document.getElementById('briefForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // منع الإرسال التقليدي للخوادم
+
   const key = document.getElementById('keyQuestionInput').value.trim();
   if (!key) {
-    e.preventDefault();
     alert('يرجى الإجابة على السؤال الجوهري الأخير');
     return;
   }
-  e.preventDefault();
-  const form = this;
-  const data = new FormData(form);
-  fetch(form.action, {
-    method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  })
-  .then(res => {
-    if (res.ok) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('successScreen').add('active'); // تم إصلاحها للاتساق
-      document.getElementById('successScreen').classList.add('active');
-      document.getElementById('progressFill').style.width = '100%';
-      document.querySelectorAll('.hero-step').forEach(s => s.classList.add('done'));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      res.json().then(data => {
-        if (data.errors) alert('حدث خطأ: ' + data.errors.map(e=>e.message).join(', '));
-        else alert('حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.');
-      });
-    }
-  })
-  .catch(() => {
-    alert('تعذّر الاتصال. تأكد من اتصالك بالإنترنت وحاول مرة أخرى.');
-  });
-});
 
-// ── INIT ──
-updateProgress();
-</script>
-</body>
-</html>
+  // تفعيل دالة جلب المقاس للتأكيد
+  prepareSubmit();
+
+  // تجميع البيانات من الحقول بشكل منظم
+  const name = document.getElementById('f_name').value;
+  const email = document.getElementById('f_email').value;
+  const whatsapp = document.querySelector('input[name="واتساب"]').value || 'لم يذكر';
+  const country = document.querySelector('select[name="البلد"]').value || 'لم يحدد';
+  const prevWork = document.getElementById('f_prevwork').value || 'لم يحدد';
+  const badExpNote = document.querySelector('textarea[name="ملاحظة_التجربة_السابقة"]').value || 'لا يوجد';
+  
+  const bookTitle = document.getElementById('f_booktitle').value;
+  const category = document.querySelector('select[name="التصنيف"]').value || 'لم يحدد';
+  const coreIdea = document.getElementById('coreIdeaInput').value;
+  const targetReader = document.querySelector('input[name="القارئ_المثالي"]').value || 'لم يذكر';
+  const readiness = document.getElementById('f_readiness').value || 'لم يحدد';
+  const pages = document.querySelector('input[name="عدد_الصفحات"]').value || 'غير محدد';
+  const publishType = document.getElementById('f_publish').value || 'لم يقرر بعد';
+  
+  const serviceType = document.getElementById('f_service').value || 'كاملة';
+  const coverStyle = document.getElementById('f_coverstyle').value || 'قرار الاستوديو';
+  const colorPref = document.querySelector('input[name="تفضيلات_الألوان"]').value || 'لا يوجد تفضيل';
+  const coverLinks = document.querySelector('input[name="أمثلة_أغلفة"]').value || 'لا يوجد روابط';
+  const bookContentNature = document.getElementById('f_booktype').value || 'غير محدد';
+  const bookSize = document.getElementById('f_size').value;
+  const specialElements = document.getElementById('f_elements').value || 'لا يوجد';
+  const fontPref = document.getElementById('f_coveropts').value || 'اترك القرار للاستوديو';
+  
+  const budget = document.getElementById('f_budget').value || 'لم يحدد';
+  const priority = document.getElementById('f_priority_hidden').value || 'توازن بينهما';
+  const launchDate = document.querySelector('input[name="موعد_الإطلاق"]').value || 'غير محدد';
+  const contactPref = document.querySelector('select[name="طريقة_التواصل"]').value || 'واتساب';
+  
+  const extraNotes = document.querySelector('textarea[name="ملاحظات_إضافية"]').value || 'لا يوجد';
+  const source = document.getElementById('f_source').value || 'غير محدد';
+
+  // صياغة نص الإيميل بشكل منظم وجذاب للقراءة والطباعة داخل بريدك
+  let emailBody = `بريف مشروع جديد من: ${name}\n`;
+  emailBody += `====================================\n\n`;
+  
+  emailBody += `[1] بيانات العميل:\n`;
+  emailBody += `-----------------\n`;
+  emailBody += `• الاسم: ${name}\n`;
+  emailBody += `• البريد الإلكتروني: ${email}\n`;
+  emailBody += `• واتساب: ${whatsapp}\n`;
+  emailBody += `• البلد: ${country}\n`;
+  emailBody += `• تجربة سابقة مع مصمم: ${prevWork}\n`;
+  if(prevWork.includes('سلبية')) {
+    emailBody += `• شكوى التجربة السابقة: ${badExpNote}\n`;
+  }
+  emailBody += `\n`;
+
+  emailBody += `[2] عن الخدمة والكتاب:\n`;
+  emailBody += `----------------------\n`;
+  emailBody += `• الخدمة المطلوبة: ${serviceType}\n`;
+  emailBody += `• عنوان الكتاب: ${bookTitle}\n`;
+  emailBody += `• تصنيف الكتاب: ${category}\n`;
+  emailBody += `• الفكرة المحورية: ${coreIdea}\n`;
+  emailBody += `• القارئ المثالي: ${targetReader}\n`;
+  emailBody += `• جهوزية المخطوطة: ${readiness}\n`;
+  emailBody += `• عدد الصفحات التقريبي: ${pages}\n`;
+  emailBody += `• طريقة النشر: ${publishType}\n`;
+  emailBody += `\n`;
+
+  emailBody += `[3] تفاصيل التصميم والهندسة البصرية:\n`;
+  emailBody += `------------------------------------\n`;
+  emailBody += `• طبيعة المحتوى الداخلي: ${bookContentNature}\n`;
+  emailBody += `• مقاس الكتاب: ${bookSize}\n`;
+  emailBody += `• توجه الغلاف البصري: ${coverStyle}\n`;
+  emailBody += `• تفضيلات الألوان: ${colorPref}\n`;
+  emailBody += `• روابط أمثلة الأغلفة: ${coverLinks}\n`;
+  emailBody += `• عناصر خاصة بالمخطوطة: ${specialElements}\n`;
+  emailBody += `• تفضيل الخطوط: ${fontPref}\n`;
+  emailBody += `\n`;
+
+  emailBody += `[4] التوقعات والإطار الزمني:\n`;
+  emailBody += `----------------------------\n`;
+  emailBody += `• الميزانية التقريبية: ${budget}\n`;
+  emailBody += `• الأولوية الأساسية: ${priority}\n`;
+  emailBody += `• موعد الإطلاق المستهدف: ${launchDate}\n`;
+  emailBody += `• طريقة التواصل المفضلة: ${contactPref}\n`;
+  emailBody += `\n`;
+
+  emailBody += `[5] السؤال الجوهري والملاحظات:\n`;
+  emailBody += `---------------------------------\n`;
+  emailBody += `• ما يخشى ألا يفهمه المصمم:\n"${key}"\n\n`;
+  emailBody += `• ملاحظات إضافية: ${extraNotes}\n`;
+  emailBody += `• كيف وصل إلينا: ${source}\n`;
+
+  // تجهيز رابط ميكانيكية mailto المشفرة لضمان قراءة اللغة العربية بشكل سليم
+  const mailtoTarget = "a2bookstudio@gmail.com";
+  const subjectText = encodeURIComponent(`A2BOOK Brief — ${name} — ${bookTitle}`);
+  const bodyText = encodeURIComponent(emailBody);
+
+  // إظهار واجهة النجاح للمستخدم مباشرة لتعزيز تجربة المستخدم (UX)
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('successScreen').classList.add('active');
+  document.getElementById('progressFill').style.width = '100%';
+  document.querySelectorAll('.hero-step').forEach(s => s.classList.add('done'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // فتح تطبيق البريد لدى العميل فوراً ومباشرة لإرسال الإيميل المعد
+  window.location.href = `mailto:${mailtoTarget}?subject=${subjectText}&body=${bodyText}`;
+});
